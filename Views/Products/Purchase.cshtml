@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Purchase";
+}
+
+    <div class="purchase">
+        <h2>Purchase</h2>
+
+        @using (Html.BeginForm("Confirm", "Products", FormMethod.Post))
+        {
+            <div class="form">
+                <span>Address:</span>
+                <input type="text" name="Address">
+                <br/>
+                <span>Number:</span>
+                <input type="tel" pattern="[0-9]+" name="Number">
+                <br/>
+                <button type="submit" value="Confirm">Confirm</button>
+            </div>
+    }
+    </div>

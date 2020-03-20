@@ -1,0 +1,49 @@
+﻿@using Shop.Models
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+@if (Session["cart"] != null)
+{
+    <div class="cart-menu">
+        <h2>CART</h2>
+        <div class="cart-sub-menu">
+            <h3>Total: @ViewBag.Total</h3>
+            &nbsp; | &nbsp;
+            <h3>@Html.ActionLink("PURCHASE", "Purchase", "Products")</h3>
+        </div>
+    </div>
+
+    <div class="product-list">
+        @foreach (OrderDetail item in (List<OrderDetail>)Session["cart"])
+        {
+            <div class="product">
+                <div class="product-head" style="background-image:url('@Url.Content("/Images/Products/" + item.Product.ImagePath)'); background-size: cover;">
+
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h4 class="product-name">@item.Product.Name</h4>
+                        <p>Category: @item.Product.Category.Name</p>
+                        <p>Brand: @item.Product.Brand.Name</p>
+                        <p>Price: @item.Product.Price UAH</p>
+                    </div>
+                    <div class="add-remove">
+                        <div>
+                            <span class="add-b">@Html.ActionLink("ADD", "AddToCart", "Products", new { ProductId = item.Product.Id }, new { @role = "button" })</span>
+                            &nbsp;|&nbsp;
+                            <span class="remove-b">@Html.ActionLink("REMOVE", "RemoveFromCart", "Products", new { ProductId = item.Product.Id }, new { @role = "button" })</span>
+                        </div>
+                        <span>Amount: @item.Amount</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+}
+else
+{
+    <h1 class="empty">Cart is empty</h1>
+}

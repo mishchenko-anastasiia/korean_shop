@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Manage";
+}
+
+    <div class="manage">
+        <h2>Manage</h2>
+
+        <table style="width: 100%">
+            <tr>
+                <th align="left">Name</th>
+                <th align="left">Image</th>
+                <th align="left">Price</th>
+                <th align="left">Category</th>
+                <th align="left">Brand</th>
+            </tr>
+            @foreach (var product in ViewBag.Products)
+            {
+
+                <tr>
+                    <td><p>@product.Name</p></td>
+                    <td><a href="@Url.Content("/Images/Products/" + product.ImagePath)" />@product.ImagePath</td>
+                    <td><p>@product.Price</p></td>
+                    <td><p>@product.Category.Name</p></td>
+                    <td><p>@product.Brand.Name</p></td>
+                    <td><p>@Html.ActionLink("Edit", "Edit", "Manage", new { ProductId = product.Id }, new { @role = "button" })</p></td>
+                    <td><p>@Html.ActionLink("Delete", "Delete", "Manage", new { ProductId = product.Id }, new { @role = "button" })</p></td>
+                </tr>
+
+            }
+        </table>
+    </div>

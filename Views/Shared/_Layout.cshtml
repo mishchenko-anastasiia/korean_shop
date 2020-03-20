@@ -1,0 +1,49 @@
+﻿@using Shop.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Contest</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <div class="navbar">
+                <ul class="nav">
+                    @if (ViewBag.Role != Role.ANONYMOUS && ViewBag.User != null)
+                    {
+                        <li><p>Hello, @ViewBag.User.Login!</p></li>
+                    }
+                    <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                    <li>@Html.ActionLink("PRODUCTS", "Index", "Products")</li>
+                    @switch (ViewBag.Role)
+                    {
+                    case Role.ANONYMOUS:
+                        <li>@Html.ActionLink("SIGN IN", "SignIn", "User")</li>
+                        <li>@Html.ActionLink("SIGN UP", "SignUp", "User")</li>
+                        break;
+                    case Role.USER:
+                        <li>@Html.ActionLink("CART", "Cart", "Products")</li>
+                        <li>@Html.ActionLink("ORDERS", "Orders", "User")</li>
+                        <li>@Html.ActionLink("LOG OUT", "LogOut", "User")</li>
+                        break;
+                    case Role.ADMIN:
+                        <li>@Html.ActionLink("CREATE", "Create", "Manage")</li>
+                        <li>@Html.ActionLink("MANAGE", "Index", "Manage")</li>
+                        <li>@Html.ActionLink("ORDERS", "Orders", "Manage")</li>
+                        <li>@Html.ActionLink("LOG OUT", "LogOut", "User")</li>
+                        break;
+                    }
+                </ul>
+            </div>
+            @RenderBody()
+        </div>
+        
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

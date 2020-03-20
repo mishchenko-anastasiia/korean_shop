@@ -1,0 +1,57 @@
+﻿@using Shop.Models
+
+@{
+    ViewBag.Title = "Products";
+}
+
+    <div class="products-menu">
+        <h2>Products</h2>
+        <div class="filters">
+            @using (Html.BeginForm("Search", "Products", FormMethod.Post))
+            {
+                <span>Search:</span>
+                <input type="text" name="Filter">
+                <span>Brand:</span>
+                <select name="Brand">
+                    <option selected>All</option>
+                    @foreach (var brand in ViewBag.Brands)
+                    {
+                        <option>@brand.Name</option>
+                    }
+                </select>
+                <span>Category:</span>
+                <select name="Category">
+                    <option selected>All</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option>@category.Name</option>
+                    }
+                </select>
+                <input type="submit" value="Apply" />
+             }
+        </div>
+    </div>
+
+<div class="product-list">
+    @foreach (var product in ViewBag.Products)
+    {
+    <div class="product">
+        <div class="product-head" style="background-image:url('@Url.Content("/Images/Products/" + product.ImagePath)'); background-size: cover;">
+        </div>
+        <div class="card-body">
+            <div>
+                <h4 class="product-name">@product.Name</h4>
+                <p>Category: @product.Category.Name</p>
+                <p>Brand: @product.Brand.Name</p>
+                <p>Price: @product.Price UAH</p>
+            </div>
+            <div class="add">
+                @if (ViewBag.Role == Role.USER)
+                {
+                    <p>@Html.ActionLink("ADD TO CART", "AddToCart", "Products", new { ProductId = product.Id }, new { @role = "button" })</p>
+                }
+            </div>
+        </div>
+    </div>
+    }
+</div>

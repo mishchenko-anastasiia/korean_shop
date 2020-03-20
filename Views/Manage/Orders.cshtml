@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Orders";
+}
+<div class="orders">
+    <h2>Orders</h2>
+
+    <div class="product-list">
+        @foreach (var order in ViewBag.Orders)
+        {
+            <div class="order">
+
+                <p>Login: @order.User.Login</p>
+                <p>Number: @order.Number</p>
+                <p>Address: @order.Address</p>
+                <p>Products:</p>
+                @foreach (var detail in order.OrderDetails)
+                {
+                    <p>@detail.Amount - @detail.Product.Name</p>
+                }
+                <p>Total: @order.Total</p>
+            </div>
+        }
+    </div>
+</div>
+

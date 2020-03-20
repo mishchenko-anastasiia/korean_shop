@@ -1,0 +1,60 @@
+﻿@model Shop.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+    <div class="edit">
+        <h2>Edit</h2>
+
+        @using (Html.BeginForm("Save", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+        <div class="form">
+            <span>Name:</span>
+            <input type="text" value="@Model.Name" name="Name">
+            <br />
+
+            <span>Image:</span>
+            <input type="file" name="Image" accept="image/*">
+            <br />
+
+            <span>Price:</span>
+            <input type="number" value="@Model.Price" name="Price">
+            <br />
+
+            <span>Category:</span>
+            <select name="Category">
+                @foreach (var category in ViewBag.Categories)
+                {
+                    if (category.Name == @Model.Category.Name)
+                    {
+                        <option selected>@category.Name</option>
+                    }
+                    else
+                    {
+                        <option>@category.Name</option>
+                    }
+                }
+            </select>
+            <br />
+
+            <span>Brand:</span>
+            <select name="Brand">
+                @foreach (var brand in ViewBag.Brands)
+                {
+                    if (brand.Name == @Model.Brand.Name)
+                    {
+                        <option selected>@brand.Name</option>
+                    }
+                    else
+                    {
+                        <option>@brand.Name</option>
+                    }
+                }
+            </select>
+            <br />
+
+            <button type="submit" value="Save" >Save</button>
+        </div>
+        }
+    </div>

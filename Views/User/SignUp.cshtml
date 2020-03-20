@@ -1,0 +1,26 @@
+﻿@model Shop.Models.User
+
+@{
+    ViewBag.Title = "Sign Up";
+}
+
+    <div class="sign-up">
+        <h2>Sign Up</h2>
+
+        @using (Html.BeginForm("SignUp", "User", FormMethod.Post))
+        {
+            <div class="form">
+                <span>Login:</span>
+                @Html.TextBoxFor(model => model.Login)
+                @Html.ValidationMessageFor(model => model.Login)
+                <br />
+
+                <span>Password:</span>
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+                <br />
+
+                <button type="submit">Sign Un</button>
+            </div>
+        }
+    </div>
